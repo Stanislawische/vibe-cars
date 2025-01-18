@@ -48,9 +48,9 @@ export async function GET(req: NextRequest) {
 			},
 		});
 
-		return NextResponse.redirect(new URL(process.env.NEXTAUTH_CALLBACK as string, req.url));
+		return NextResponse.redirect(new URL(process.env.NEXTAUTH_URL as string, req.url));
 	} catch (error) {
 		console.log(error);
 		console.log('[GET_VERIFY] Error:', error);
-	}
+	} 
 }
