@@ -33,7 +33,7 @@ export const ChooseCarModal: React.FC<Props> = ({ car, className }) => {
 		<Dialog open={Boolean(car)} onOpenChange={() => router.back()}>
 			<DialogContent
 				className={cn(
-					'p-0 w-[1000px] max-w-[1000px] min-h-[450px] bg-zinc-800 overflow-hidden',
+					'p-0 w-[1000px] max-w-[1000px] min-h-[450px] bg-zinc-800 overflow-x-auto',
 					className
 				)}>
 					
