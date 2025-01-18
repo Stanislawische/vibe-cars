@@ -1,7 +1,7 @@
-import { ChooseCarModal } from "@/shared/components/shared";
-import { prisma } from "@/prisma/prisma-client";
-import { notFound } from "next/navigation";
- 
+import { ChooseCarModal } from '@/shared/components/shared';
+import { prisma } from '@/prisma/prisma-client';
+import { notFound } from 'next/navigation';
+
 /**
  * Страница с модальным окном для выбора автомобиля.
  * Эта страница используется как компонент модального окна для `NextLink` из `@/components/layout/header/header-links`.
@@ -14,25 +14,25 @@ import { notFound } from "next/navigation";
  */
 
 export default async function CarModalPage({
-    params,
+	params,
 }: {
-    params: Promise<{ id: string }>;
+	params: Promise<{ id: string }>;
 }) {
-    const { id } = await params;
+	const { id } = await params;
 
-    const car = await prisma.productDB.findFirst({
-        where: {
-            id: Number(id),
-        },
-        include: {
-            plans: true,
-            items: true,
-        },
-    });
+	const car = await prisma.productDB.findFirst({
+		where: {
+			id: Number(id),
+		},
+		include: {
+			plans: true,
+			items: true,
+		},
+	});
 
-    if (!car) {
-        return notFound();
-    }
+	if (!car) {
+		return notFound();
+	}
 
-    return <ChooseCarModal car={car} />;
+	return <ChooseCarModal car={car} />;
 }

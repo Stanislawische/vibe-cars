@@ -3,6 +3,6 @@
  * настроить с учетом конкретных требований.
  */
 
-export default function Default () {
-    return null;
+export default function Default() {
+	return null;
 }

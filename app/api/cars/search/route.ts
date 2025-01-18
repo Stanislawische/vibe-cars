@@ -12,7 +12,7 @@ import { NextRequest, NextResponse } from 'next/server';
  *   { id: 2, name: 'Geely Emgrand New' },
  *   { id: 3, name: 'Geely Monjaro' },
  * ]
- */ 
+ */
 
 export async function GET(req: NextRequest) {
 	try {

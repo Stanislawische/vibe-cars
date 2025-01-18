@@ -242,214 +242,322 @@ export async function registerUser(body: Prisma.UserDBCreateInput) {
 
 /* Dashboard Actions */
 
+/**
+ * Обновляет данные пользователя.
+ *
+ * @param {number} id - ID пользователя.
+ * @param {Prisma.UserDBUpdateInput} data - Обновленные данные пользователя.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function updateUser(id: number, data: Prisma.UserDBUpdateInput) {
-  try {
-    await prisma.userDB.update({
-      where: {
-        id,
-      },
-      data: {
-        ...data,
-        verified: new Date(),
-        ...(data.password && { password: hashSync(String(data.password), 10) }),
-      },
-    });
-  } catch (error) {
-    console.log('Error [UPDATE_USER]', error);
-    throw error;
-  }
+	try {
+		await prisma.userDB.update({
+			where: {
+				id,
+			},
+			data: {
+				...data,
+				verified: new Date(),
+				...(data.password && { password: hashSync(String(data.password), 10) }),
+			},
+		});
+	} catch (error) {
+		console.log('Error [UPDATE_USER]', error);
+		throw error;
+	}
 }
 
+/**
+ * Создает нового пользователя.
+ *
+ * @param {Prisma.UserDBCreateInput} data - Данные нового пользователя.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function createUser(data: Prisma.UserDBCreateInput) {
-  try {
-    await prisma.userDB.create({
-      data: {
-        ...data,
-        password: hashSync(data.password, 10),
-      },
-    });
+	try {
+		await prisma.userDB.create({
+			data: {
+				...data,
+				password: hashSync(data.password, 10),
+			},
+		});
 
-    revalidatePath('/dashboard/users');
-  } catch (error) {
-    console.log('Error [CREATE_USER]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/users');
+	} catch (error) {
+		console.log('Error [CREATE_USER]', error);
+		throw error;
+	}
 }
 
+/**
+ * Удаляет пользователя.
+ *
+ * @param {number} id - ID пользователя.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function deleteUser(id: number) {
-  await prisma.userDB.delete({
-    where: {
-      id,
-    },
-  });
+	await prisma.userDB.delete({
+		where: {
+			id,
+		},
+	});
 
-  revalidatePath('/dashboard/users');
+	revalidatePath('/dashboard/users');
 }
 
-export async function updateCategory(id: number, data: Prisma.CategoryDBUpdateInput) {
-  try {
-    await prisma.categoryDB.update({
-      where: {
-        id,
-      },
-      data,
-    });
-  } catch (error) {
-    console.log('Error [UPDATE_CATEGORY]', error);
-    throw error;
-  }
+/**
+ * Обновляет данные категории.
+ *
+ * @param {number} id - ID категории.
+ * @param {Prisma.CategoryDBUpdateInput} data - Обновленные данные категории.
+ * @throws {Error} - Если произошла ошибка.
+ */
+export async function updateCategory(
+	id: number,
+	data: Prisma.CategoryDBUpdateInput
+) {
+	try {
+		await prisma.categoryDB.update({
+			where: {
+				id,
+			},
+			data,
+		});
+	} catch (error) {
+		console.log('Error [UPDATE_CATEGORY]', error);
+		throw error;
+	}
 }
 
+/**
+ * Создает новую категорию.
+ *
+ * @param {Prisma.CategoryDBCreateInput} data - Данные новой категории.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function createCategory(data: Prisma.CategoryDBCreateInput) {
-  try {
-    await prisma.categoryDB.create({
-      data,
-    });
+	try {
+		await prisma.categoryDB.create({
+			data,
+		});
 
-    revalidatePath('/dashboard/categories');
-  } catch (error) {
-    console.log('Error [CREATE_CATEGORY]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/categories');
+	} catch (error) {
+		console.log('Error [CREATE_CATEGORY]', error);
+		throw error;
+	}
 }
 
+/**
+ * Удаляет категорию.
+ *
+ * @param {number} id - ID категории.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function deleteCategory(id: number) {
-  await prisma.categoryDB.delete({
-    where: {
-      id,
-    },
-  });
+	await prisma.categoryDB.delete({
+		where: {
+			id,
+		},
+	});
 
-  revalidatePath('/dashboard/categories');
+	revalidatePath('/dashboard/categories');
 }
 
-export async function updateProduct(id: number, data: Prisma.ProductDBUpdateInput) {
-  try {
-    await prisma.productDB.update({
-      where: {
-        id,
-      },
-      data,
-    });
-  } catch (error) {
-    console.log('Error [UPDATE_PRODUCT]', error);
-    throw error;
-  }
+/**
+ * Обновляет данные продукта.
+ *
+ * @param {number} id - ID продукта.
+ * @param {Prisma.ProductDBUpdateInput} data - Обновленные данные продукта.
+ * @throws {Error} - Если произошла ошибка.
+ */
+export async function updateProduct(
+	id: number,
+	data: Prisma.ProductDBUpdateInput
+) {
+	try {
+		await prisma.productDB.update({
+			where: {
+				id,
+			},
+			data,
+		});
+	} catch (error) {
+		console.log('Error [UPDATE_PRODUCT]', error);
+		throw error;
+	}
 }
 
+/**
+ * Создает новый продукт.
+ *
+ * @param {Prisma.ProductDBCreateInput} data - Данные нового продукта.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function createProduct(data: Prisma.ProductDBCreateInput) {
-  try {
-    await prisma.productDB.create({
-      data,
-    });
+	try {
+		await prisma.productDB.create({
+			data,
+		});
 
-    revalidatePath('/dashboard/products');
-  } catch (error) {
-    console.log('Error [CREATE_PRODUCT]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/products');
+	} catch (error) {
+		console.log('Error [CREATE_PRODUCT]', error);
+		throw error;
+	}
 }
 
+/**
+ * Удаляет продукт.
+ *
+ * @param {number} id - ID продукта.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function deleteProduct(id: number) {
-  await prisma.productDB.delete({
-    where: {
-      id,
-    },
-  });
+	await prisma.productDB.delete({
+		where: {
+			id,
+		},
+	});
 
-  revalidatePath('/dashboard/products');
+	revalidatePath('/dashboard/products');
 }
 
+/**
+ * Обновляет данные тарифа.
+ *
+ * @param {number} id - ID тарифа.
+ * @param {Prisma.PlanDBUpdateInput} data - Обновленные данные тарифа.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function updatePlans(id: number, data: Prisma.PlanDBUpdateInput) {
-  try {
-    await prisma.planDB.update({
-      where: {
-        id,
-      },
-      data,
-    });
-  } catch (error) {
-    console.log('Error [UPDATE_PLANS]', error);
-    throw error;
-  }
+	try {
+		await prisma.planDB.update({
+			where: {
+				id,
+			},
+			data,
+		});
+	} catch (error) {
+		console.log('Error [UPDATE_PLANS]', error);
+		throw error;
+	}
 }
 
+/**
+ * Создает новый тариф.
+ *
+ * @param {Prisma.PlanDBCreateInput} data - Данные нового тарифа.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function createPlans(data: Prisma.PlanDBCreateInput) {
-  try {
-    await prisma.planDB.create({
-      data: {
-        name: data.name,
-        price: data.price,
-      },
-    });
+	try {
+		await prisma.planDB.create({
+			data: {
+				name: data.name,
+				price: data.price,
+			},
+		});
 
-    revalidatePath('/dashboard/PLANS');
-  } catch (error) {
-    console.log('Error [CREATE_PLANS]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/PLANS');
+	} catch (error) {
+		console.log('Error [CREATE_PLANS]', error);
+		throw error;
+	}
 }
 
+/**
+ * Удаляет тариф.
+ *
+ * @param {number} id - ID тарифа.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function deletePLans(id: number) {
-  try {
-    await prisma.planDB.delete({
-      where: {
-        id,
-      },
-    });
+	try {
+		await prisma.planDB.delete({
+			where: {
+				id,
+			},
+		});
 
-    revalidatePath('/dashboard/plans');
-  } catch (error) {
-    console.log('Error [DELETE_PLANS]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/plans');
+	} catch (error) {
+		console.log('Error [DELETE_PLANS]', error);
+		throw error;
+	}
 }
 
-export async function updateProductItemDB(id: number, data: Prisma.ProductItemDBUpdateInput) {
-  try {
-    await prisma.productItemDB.update({
-      where: {
-        id,
-      },
-      data,
-    });
-  } catch (error) {
-    console.log('Error [UPDATE_PRODUCT_ITEM]', error);
-    throw error;
-  }
+/**
+ * Обновляет данные элемента продукта.
+ *
+ * @param {number} id - ID элемента продукта.
+ * @param {Prisma.ProductItemDBUpdateInput} data - Обновленные данные элемента продукта.
+ * @throws {Error} - Если произошла ошибка.
+ */
+export async function updateProductItemDB(
+	id: number,
+	data: Prisma.ProductItemDBUpdateInput
+) {
+	try {
+		await prisma.productItemDB.update({
+			where: {
+				id,
+			},
+			data,
+		});
+	} catch (error) {
+		console.log('Error [UPDATE_PRODUCT_ITEM]', error);
+		throw error;
+	}
 }
 
-export async function createProductItemDB(data: Prisma.ProductItemDBUncheckedCreateInput) {
-  try {
-    await prisma.productItemDB.create({
-      data: {
-        price: data.price,
-        productId: data.productId,
-		description: data.description,
-		color: data.color,
-		horsepower: data.horsepower,
-		gearbox: data.gearbox,
-      },
-    });
+/**
+ * Создает новый элемент продукта.
+ *
+ * @param {Prisma.ProductItemDBUncheckedCreateInput} data - Данные нового элемента продукта.
+ * @throws {Error} - Если произошла ошибка.
+ */
+export async function createProductItemDB(
+	data: Prisma.ProductItemDBUncheckedCreateInput
+) {
+	try {
+		await prisma.productItemDB.create({
+			data: {
+				price: data.price,
+				productId: data.productId,
+				description: data.description,
+				color: data.color,
+				horsepower: data.horsepower,
+				gearbox: data.gearbox,
+			},
+		});
 
-    revalidatePath('/dashboard/product-items');
-  } catch (error) {
-    console.log('Error [CREATE_PRODUCT_ITEM]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/product-items');
+	} catch (error) {
+		console.log('Error [CREATE_PRODUCT_ITEM]', error);
+		throw error;
+	}
 }
 
+/**
+ * Удаляет элемент продукта.
+ *
+ * @param {number} id - ID элемента продукта.
+ * @throws {Error} - Если произошла ошибка.
+ */
 export async function deleteProductItemDB(id: number) {
-  try {
-    await prisma.productItemDB.delete({
-      where: {
-        id,
-      },
-    });
+	try {
+		await prisma.productItemDB.delete({
+			where: {
+				id,
+			},
+		});
 
-    revalidatePath('/dashboard/product-items');
-  } catch (error) {
-    console.log('Error [DELETE_PRODUCT_ITEM]', error);
-    throw error;
-  }
+		revalidatePath('/dashboard/product-items');
+	} catch (error) {
+		console.log('Error [DELETE_PRODUCT_ITEM]', error);
+		throw error;
+	}
 }
+
+

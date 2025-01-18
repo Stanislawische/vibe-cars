@@ -4,7 +4,6 @@ import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
 
 export default async function DashboardProductItems() {
-	
 	const session = await getUserSession();
 
 	if (!session) {

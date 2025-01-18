@@ -4,5 +4,5 @@
  */
 
 export default function CatchAll() {
-    return null;
+	return null;
 }

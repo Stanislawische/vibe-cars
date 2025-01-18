@@ -17,8 +17,21 @@ import { createOrder } from '@/app/actions';
 import toast from 'react-hot-toast';
 import React from 'react';
 
+/**
+ * Отрисовывает страницу оформления заказа, где пользователи могут просматривать
+ * добавленные в корзину автомобили, заполнять персональную и адресную
+ * форму, и продолжить оформление заказа.
+ *
+ * Использует react-hook-form для управления формами и zod для валидации
+ * схемы. Получает данные о корзине и действиях через хук useCart.
+ * Обрабатывает создание заказа и отображает уведомления toast об успешном
+ * или ошибочном результате.
+ *
+ * @returns {ReactElement} Отрисовываемый компонент страницы оформления
+ *          заказа.
+ */
+
 export default function CheckoutPage() {
-	
 	const { totalAmount, items, updateItemQuantity, removeCartItem, loading } =
 		useCart();
 	const [submiting, setSubmiting] = React.useState(false);
@@ -53,8 +66,6 @@ export default function CheckoutPage() {
 				},
 			});
 
-        
-
 			if (url) {
 				location.href = url;
 			}
@@ -84,7 +95,6 @@ export default function CheckoutPage() {
 		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
 		updateItemQuantity(id, newQuantity);
 	};
-
 
 	return (
 		<Container className="mt-10">

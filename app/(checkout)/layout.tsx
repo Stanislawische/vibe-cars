@@ -6,6 +6,14 @@ export const metadata = {
 	title: 'Vibe Cars | Корзина',
 };
 
+/**
+ * Макет для страниц оформления заказа.
+ *
+ * @example
+ * <CheacoutLayout>
+ *   <MyCheckoutPage />
+ * </CheacoutLayout>
+ */
 export default function CheacoutLayout({
 	children,
 }: {

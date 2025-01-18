@@ -8,21 +8,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * Корневой макет для приложения. Этот компонент отвечает за рендеринг
- * элементов `<html>`, `<body>` и `<main>`, а также заголовка и модального
- * компонента. Свойство `children` является обязательным и должно быть
- * передано содержимое страницы, а свойство `modal` является необязательным
- * и может быть передано модальное окно для рендеринга над контентом страницы.
+ * Корневой макет приложения.
  *
- * @example
- * <RootLayout>
- *   <MyPage />
- * </RootLayout>
+ * Этот компонент отображает основные элементы страницы:
+ * - Шапку
+ * - Модальное окно (если оно есть)
+ * - Содержимое страницы (детей)
  *
- * @example
- * <RootLayout modal={<MyModal />}>
- *   <MyPage />
- * </RootLayout>
+ * @param children - Содержимое страницы
+ * @param modal - Модальное окно (если оно есть)
  */
 export default function RootLayout({
 	children,
@@ -32,14 +26,12 @@ export default function RootLayout({
 	modal: React.ReactNode;
 }>) {
 	return (
-		// <body className={`${nunito.variable} antialiased bg-zinc-900`}>
 		<main className="min-h-screen">
 			<Suspense>
-			<Header />
+				<Header />
 			</Suspense>
 			{modal}
 			{children}
 		</main>
-		// </body>
 	);
 }

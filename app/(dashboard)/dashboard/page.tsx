@@ -23,8 +23,5 @@ export default async function Dashboard() {
 		return <div>Доступ запрещен</div>;
 	}
 
-	return (
-		<main>
-		</main>
-	);
+	return <main></main>;
 }

@@ -1,10 +1,9 @@
-import { prisma } from "@/prisma/prisma-client";
-import { CreateProductForm } from "@/shared/components/shared/dashboard/forms/create-product-form/create-product-form";
-import { getUserSession } from "@/shared/lib/get-user-session";
-import { redirect } from "next/navigation";
+import { prisma } from '@/prisma/prisma-client';
+import { CreateProductForm } from '@/shared/components/shared/dashboard/forms/create-product-form/create-product-form';
+import { getUserSession } from '@/shared/lib/get-user-session';
+import { redirect } from 'next/navigation';
 
 export default async function DashboardProducts() {
-	
 	const products = await prisma.productDB.findMany({
 		where: {
 			name: {
@@ -17,7 +16,7 @@ export default async function DashboardProducts() {
 		},
 	});
 
-    const session = await getUserSession();
+	const session = await getUserSession();
 
 	if (!session) {
 		return redirect('/access-denied');
@@ -37,8 +36,5 @@ export default async function DashboardProducts() {
 		return <div>Доступ запрещен</div>;
 	}
 
-    return (
-        <CreateProductForm values={products[1]}/>              
-    );
+	return <CreateProductForm values={products[1]} />;
 }
- 
