@@ -1,0 +1,190 @@
+
+    /// Подключение к JS клиенту
+generator client {
+    provider    = "prisma-client-js"
+}
+
+    /// Подключение ДБ
+datasource db {
+    provider    = "postgresql"
+    url         = env("DATABASE_URL")
+    directUrl   = env("DATABASE_URL_UNPOOLED")
+}
+
+ 
+    /// Таблица "Пользователи"
+model UserDB {
+    id              Int           @id @default(autoincrement())
+
+    fullName        String
+    email           String        @unique
+    password        String
+    role            UserRoleDB    @default(USER)
+    verified        DateTime?
+
+    provider        String?
+    providerId      String?
+
+    orders          OrderDB[]
+    cartItem        CartItemDB[]
+    cart            CartDB?
+    verifCode       VerificationCodeDB?
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+
+
+}
+
+
+    /// Таблица "Категории"
+model CategoryDB {
+    id              Int           @id @default(autoincrement())
+    name            String        @unique
+
+    products        ProductDB[]
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+
+    /// Таблица "Авто без вариаций 'цвет' и 'тип трансмиссии'" - [CarFrame]
+model ProductDB {
+    id              Int           @id @default(autoincrement())
+
+    name            String
+    imageUrl        String
+
+    plans           PlanDB[]                                                   //Ingredient - DELETE
+    items           ProductItemDB[] 
+
+    category        CategoryDB    @relation(fields: [categoryId], references: [id])
+    categoryId      Int
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+
+    /// Таблица "Вариации авто" - [CarReady]
+model ProductItemDB {
+    id              Int           @id @default(autoincrement())
+
+    price           Float                                                             // Цена авто  
+    description     String                                                          // Описание авто  
+    horsepower      Int                                                             // Кол-во лошадинных сил
+
+    color           Int?                                                            // Цвет авто, может отсутствовать
+    gearbox         Int?                                                            // Тип коробки передач, может отсутствовать
+    
+    product         ProductDB     @relation(fields: [productId], references: [id])
+    productId       Int
+
+    cartItems       CartItemDB[]
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+
+    /// Таблица "Тарифный план" - Ingridients [CarEquipment]
+model PlanDB {
+    id              Int           @id @default(autoincrement())
+
+    name            String
+    price           Float
+
+    cartItems       CartItemDB[]
+    product         ProductDB[]
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+
+    /// Таблица "Корзина"
+model CartDB {
+    id              Int           @id @default(autoincrement())
+
+    user            UserDB?       @relation(fields: [userId], references: [id])
+    userId          Int?          @unique
+
+    items           CartItemDB[]
+
+    token           String?
+
+    totalAmount     Int           @default(0)
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+    /// Таблица "Авто в заказе"
+model CartItemDB {
+    id              Int           @id @default(autoincrement())
+
+    productItem     ProductItemDB @relation(fields: [productItemId], references: [id])
+    productItemId   Int
+
+    cart            CartDB        @relation(fields: [cartId], references: [id])
+    cartId          Int
+    
+    quantity        Int           @default(1)                                     
+
+    plan            PlanDB[]
+
+    user            UserDB?       @relation(fields: [userId], references: [id])
+    userId          Int?
+
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+}
+    /// Таблица "История заказов"
+model OrderDB {
+    id              Int           @id @default(autoincrement())
+
+    user            UserDB?       @relation(fields: [userId], references: [id])
+    userId          Int?
+
+    token           String
+
+    totalAmount     Int
+
+    status          OrderStatusDB @default(PENDING)
+    paymentId       String?
+    items           Json
+
+    fullName        String
+    address         String?
+    email           String
+    phone           String
+    comment         String?
+
+    createdAt       DateTime      @default(now())
+    updateAt        DateTime      @updatedAt
+}
+
+
+    /// Таблица "Код подтверждения"
+model VerificationCodeDB {
+    id              Int           @id @default(autoincrement())
+
+    user            UserDB        @relation(fields: [userId], references: [id])
+    userId          Int           @unique
+
+    code            String
+
+    createdAt       DateTime      @default(now())
+
+                                  @@unique([userId, code]) /// Уникальность вериф кода
+}
+
+
+    /// Роли пользователей
+    enum UserRoleDB {
+        USER
+        ADMIN
+}
+
+    /// Статус заказа
+    enum OrderStatusDB {
+        PENDING     /// Ожидание оплаты
+        SUCCEEDED   /// Оплачено
+        CANCELLED   /// Отменено
+}
