@@ -20,7 +20,7 @@ export default async function Dashboard() {
 	}
 
 	if (!session || session.role !== 'ADMIN') {
-		return <div>Доступ запрещен</div>;
+		return redirect('/access-denied');
 	}
 
 	return <main></main>;
