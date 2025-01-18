@@ -17,7 +17,7 @@ export const VerificationUserTemplate: React.FC<Props> = ({
 			Код подтверждения: <b><h2>{code}</h2></b>
 		</p>
 		<p>
-			Перейдите <b><a href={`http://localhost:3000/api/auth/verify?code=${code}`}>по этой ссылке</a></b> для подтверждения аккаунта.
+			Перейдите <b><a href={`https://vibe-cars.vercel.app/api/auth/verify?code=${code}`}>по этой ссылке</a></b> для подтверждения аккаунта.
 		</p>
 		<hr />
 		<p>
