@@ -15,11 +15,12 @@ export default function CheacoutLayout({
 		<main className="min-h-screen bg-secondary-foreground">
 			<Container>
 				<Suspense>
-				<Header
-					hasSearch={false}
-					hasCart={false}
-					className="border-b-gray-600 bg-secondary-foreground"
-				/></Suspense>
+					<Header
+						hasSearch={false}
+						hasCart={false}
+						className="border-b-gray-600 bg-secondary-foreground"
+					/>
+				</Suspense>
 				{children}
 			</Container>
 		</main>
