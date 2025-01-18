@@ -69,7 +69,7 @@ export const Header: React.FC<Props> = ({
 	});
 	return (
 		<header
-			className={cn('border-background border-b bg-background', className)}>
+			className={cn('border-background border-b bg-background overflow-x-hidden', className)}>
 			<Container className="flex items-center justify-between pt-3 pb-1">
 				{/* Логотип */}
 				<Link href="/">

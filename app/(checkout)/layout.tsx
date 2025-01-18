@@ -20,7 +20,7 @@ export default function CheacoutLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<main className="min-h-screen bg-secondary-foreground">
+		<main className="min-h-screen min-w-[1090px] bg-secondary-foreground">
 			<Container>
 				<Suspense>
 					<Header
