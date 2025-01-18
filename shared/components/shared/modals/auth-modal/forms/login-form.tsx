@@ -98,7 +98,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 						variant={'secondary'}
 						onClick={() => {
 							signIn('github', {
-								callbackUrl: process.env.NEXTAUTH_CALLBACK as string,
+								callbackUrl: process.env.NEXTAUTH_CALLBACK,
 								redirect: true,
 							});
 						}}
@@ -116,7 +116,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 						variant={'secondary'}
 						onClick={() => {
 							signIn('google', {
-								callbackUrl: process.env.NEXTAUTH_CALLBACK as string,
+								callbackUrl: process.env.NEXTAUTH_CALLBACK,
 								redirect: true,
 							});
 						}}
