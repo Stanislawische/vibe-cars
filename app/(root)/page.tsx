@@ -43,10 +43,10 @@ export default async function Home(props: {
 
 			{/* Список авто */}
 
-			<Container className="mt-10 pb-14 min-h-screen">
+			<Container className="mt-10 pb-14 min-h-screen ">
 				<div className="flex gap-[60px]">
-					<div className="flex-1">
-						<div className="flex flex-col gap-16">
+					<div className="flex-1 ">
+						<div className="flex flex-col gap-16 ">
 							{categories.map(
 								(category) =>
 									category.products.length > 0 && (
