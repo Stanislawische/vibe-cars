@@ -26,7 +26,7 @@ export default function RootLayout({
 	modal: React.ReactNode;
 }>) {
 	return (
-		<main className="min-h-screen min-w-screen">
+		<main className="min-h-screen min-w-[1090px]">
 			<Suspense>
 				<Header />
 			</Suspense>
