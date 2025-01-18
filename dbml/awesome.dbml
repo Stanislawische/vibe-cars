@@ -1,0 +1,179 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Project "Project Name" {
+  database_type: 'PostgreSQL'
+  Note: 'Test project description'
+}
+
+Table UserDB {
+  id Int [pk, increment]
+  fullName String [not null]
+  email String [unique, not null]
+  password String [not null]
+  role UserRoleDB [not null, default: 'USER']
+  verified DateTime
+  provider String
+  providerId String
+  orders OrderDB [not null]
+  cartItem CartItemDB [not null]
+  cart CartDB
+  verifCode VerificationCodeDB
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Пользователи"'
+}
+
+Table CategoryDB {
+  id Int [pk, increment]
+  name String [unique, not null]
+  products ProductDB [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Категории"'
+}
+
+Table ProductDB {
+  id Int [pk, increment]
+  name String [not null]
+  imageUrl String [not null]
+  plans PlanDB [not null]
+  items ProductItemDB [not null]
+  category CategoryDB [not null]
+  categoryId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Авто без вариаций \'цвет\' и \'тип трансмиссии\'" - [CarFrame]'
+}
+
+Table ProductItemDB {
+  id Int [pk, increment]
+  price Float [not null]
+  description String [not null]
+  horsepower Int [not null]
+  color Int
+  gearbox Int
+  product ProductDB [not null]
+  productId Int [not null]
+  cartItems CartItemDB [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Вариации авто" - [CarReady]'
+}
+
+Table PlanDB {
+  id Int [pk, increment]
+  name String [not null]
+  price Float [not null]
+  cartItems CartItemDB [not null]
+  product ProductDB [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Тарифный план" - Ingridients [CarEquipment]'
+}
+
+Table CartDB {
+  id Int [pk, increment]
+  user UserDB
+  userId Int [unique]
+  items CartItemDB [not null]
+  token String
+  totalAmount Int [not null, default: 0]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Корзина"'
+}
+
+Table CartItemDB {
+  id Int [pk, increment]
+  productItem ProductItemDB [not null]
+  productItemId Int [not null]
+  cart CartDB [not null]
+  cartId Int [not null]
+  quantity Int [not null, default: 1]
+  plan PlanDB [not null]
+  user UserDB
+  userId Int
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+
+  Note: 'Таблица "Авто в заказе"'
+}
+
+Table OrderDB {
+  id Int [pk, increment]
+  user UserDB
+  userId Int
+  token String [not null]
+  totalAmount Int [not null]
+  status OrderStatusDB [not null, default: 'PENDING']
+  paymentId String
+  items Json [not null]
+  fullName String [not null]
+  address String
+  email String [not null]
+  phone String [not null]
+  comment String
+  createdAt DateTime [default: `now()`, not null]
+  updateAt DateTime [not null]
+
+  Note: 'Таблица "История заказов"'
+}
+
+Table VerificationCodeDB {
+  id Int [pk, increment]
+  user UserDB [not null]
+  userId Int [unique, not null]
+  code String [not null]
+  createdAt DateTime [default: `now()`, not null]
+
+  indexes {
+    (userId, code) [unique]
+  }
+
+  Note: 'Таблица "Код подтверждения"'
+}
+
+Table PlanDBToProductDB {
+  plansId Int [ref: > PlanDB.id]
+  productId Int [ref: > ProductDB.id]
+}
+
+Table CartItemDBToPlanDB {
+  cartitemsId Int [ref: > CartItemDB.id]
+  planId Int [ref: > PlanDB.id]
+}
+
+Enum UserRoleDB {
+  USER
+  ADMIN
+}
+
+Enum OrderStatusDB {
+  PENDING
+  SUCCEEDED
+  CANCELLED
+}
+
+Ref: ProductDB.categoryId > CategoryDB.id
+
+Ref: ProductItemDB.productId > ProductDB.id
+
+Ref: CartDB.userId - UserDB.id
+
+Ref: CartItemDB.productItemId > ProductItemDB.id
+
+Ref: CartItemDB.cartId > CartDB.id
+
+Ref: CartItemDB.userId > UserDB.id
+
+Ref: OrderDB.userId > UserDB.id
+
+Ref: VerificationCodeDB.userId - UserDB.id

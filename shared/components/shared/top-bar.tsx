@@ -3,6 +3,8 @@ import React from "react";
 import { Container } from "./container";
 import { Categories } from "./categories";
 import { CategoryDB } from "@prisma/client";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface Props {
   className?: string;
@@ -29,6 +31,11 @@ export const TopBar: React.FC<Props> = ({ categories, className }) => {
       )}>
       <Container className="flex items-center justify-between">
         <Categories cats={categories} />
+        <Link href="/rental-terms">
+        <Button variant="secondary" className="gap-2 w-[150px]">
+          <span>Наши условия</span>
+        </Button>
+        </Link>
       </Container>
     </div>
   );
