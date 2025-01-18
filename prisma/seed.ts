@@ -34,17 +34,8 @@ const generateProductItem = ({
 		| 13
 		| 14
 		| 15
-		| 16
-		| 17
 		| 18
-		| 19
-		| 20
-		| 21
 		| 22
-		| 23
-		| 24
-		| 25
-		| 26;
 	gearbox?: 1 | 2;
 }) => {
 	return {
@@ -407,18 +398,6 @@ async function up() {
 				gearbox: 1,
 			}),
 			generateProductItem({
-				productId: 12,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: 13,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
-				gearbox: 1,
-			}),
-			generateProductItem({
 				productId: 14,
 				description: 'Цвет: оранжевый, КПП: Автоматическая',
 				color: 18,
@@ -434,18 +413,6 @@ async function up() {
 				productId: 16,
 				description: 'Цвет: зеленый, КПП: Автоматическая',
 				color: 15,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: 17,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: 18,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
 				gearbox: 1,
 			}),
 			generateProductItem({
@@ -535,18 +502,6 @@ async function up() {
 			}),
 			generateProductItem({
 				productId: car_1.id,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_1.id,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_1.id,
 				description: 'Цвет: оранжевый, КПП: Автоматическая',
 				color: 18,
 				gearbox: 1,
@@ -622,18 +577,6 @@ async function up() {
 				productId: car_2.id,
 				description: 'Цвет: зеленый, КПП: Автоматическая',
 				color: 15,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_2.id,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_2.id,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
 				gearbox: 1,
 			}),
 			generateProductItem({
@@ -717,18 +660,6 @@ async function up() {
 			}),
 			generateProductItem({
 				productId: car_3.id,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_3.id,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_3.id,
 				description: 'Цвет: оранжевый, КПП: Автоматическая',
 				color: 18,
 				gearbox: 1,
@@ -804,18 +735,6 @@ async function up() {
 				productId: car_4.id,
 				description: 'Цвет: зеленый, КПП: Автоматическая',
 				color: 15,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_4.id,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_4.id,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
 				gearbox: 1,
 			}),
 			generateProductItem({
@@ -895,18 +814,6 @@ async function up() {
 				productId: car_5.id,
 				description: 'Цвет: зеленый, КПП: Автоматическая',
 				color: 15,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_5.id,
-				description: 'Цвет: желтый, КПП: Автоматическая',
-				color: 16,
-				gearbox: 1,
-			}),
-			generateProductItem({
-				productId: car_5.id,
-				description: 'Цвет: фиолетовый, КПП: Автоматическая',
-				color: 17,
 				gearbox: 1,
 			}),
 			generateProductItem({
