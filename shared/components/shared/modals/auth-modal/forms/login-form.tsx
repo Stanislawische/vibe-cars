@@ -94,11 +94,11 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 					Войти
 				</Button>
 				<div className="flex gap-2 mt-2">
-					<Button
+					<Button 
 						variant={'secondary'}
 						onClick={() => {
 							signIn('github', {
-								callbackUrl: '/profile',
+								callbackUrl: process.env.NEXTAUTH_CALLBACK as string,
 								redirect: true,
 							});
 						}}
@@ -116,7 +116,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 						variant={'secondary'}
 						onClick={() => {
 							signIn('google', {
-								callbackUrl: '/profile',
+								callbackUrl: process.env.NEXTAUTH_CALLBACK as string,
 								redirect: true,
 							});
 						}}
