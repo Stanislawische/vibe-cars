@@ -51,9 +51,9 @@ export const ProductCard: React.FC<Props> = ({
                     <Title
                         text={name}
                         size="sm"
-                        className="mb-1 mt-3 ml-2 font-bold w-[600px]"
+                        className="mb-1 mt-3 ml-2 font-bold "
                     />
-                    <div className="text-sm text-gray-300 px-2 w-[600px] mb-4">
+                    <div className="text-sm text-gray-300 px-2  mb-4">
                         {description}
                     </div>
 
