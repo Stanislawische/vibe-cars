@@ -42,7 +42,9 @@ export default async function CarPage({ params }: { params: Props }) {
 
 	return (
 		<Container className="flex flex-col my-10">
+			<div className='w-full rounded-2xl bg-zinc-900 p-5'>
 			<CarForm product={car} />
+			</div>
 		</Container>
 	);
 }
