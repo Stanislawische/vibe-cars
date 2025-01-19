@@ -1,12 +1,3 @@
-generator dbml {
-  provider   = "prisma-dbml-generator"
-  output     = "../dbml"
-  outputName = "awesome.dbml"
-  projectName = "Project Name"
-  projectDatabaseType = "PostgreSQL"
-  projectNote = "Test project description"
-}
-
     /// Подключение к JS клиенту
 generator client {
     provider    = "prisma-client-js"
