@@ -28,7 +28,6 @@ export const OrderSuccecTemplate: React.FC<Props> = ({
 			{items.map((item) => (
 				<li key={item.id}>
 					{item.quantity} x {item.productItem.product.name} |{' '}
-					<b>{item.productItem.price * item.quantity} BYN </b>
 				</li>
 			))}
 		</ul>

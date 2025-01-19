@@ -14,6 +14,9 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+const TAX = 20;
+const DELIVERY_PRICE = 25;
+
 /**
  * Создает заказ на основе данных из формы.
  *
@@ -80,6 +83,13 @@ export async function createOrder(data: TCheckoutFormValues) {
 			// Если да, выбрасываем ошибку, указывая, что корзина пуста
 			throw new Error('Корзина пуста');
 		}
+		
+	
+		const taxPrice = (userCart.totalAmount * TAX) / 100;
+		const deliveryPrice =
+		userCart.items.map((item) => item.quantity).reduce((acc, item) => acc + item, 0) *
+			DELIVERY_PRICE || 0;
+		const totalPrice = userCart.totalAmount + taxPrice + deliveryPrice;
 
 		// Создаем новый заказ, связываем его с корзиной,
 		// указываем полное имя, телефон, email, адрес, комментарий,
@@ -94,10 +104,19 @@ export async function createOrder(data: TCheckoutFormValues) {
 				address: data.address,
 				comment: data.comment,
 				status: OrderStatusDB.PENDING,
-				totalAmount: userCart.totalAmount,
+				totalAmount: totalPrice,
 				items: JSON.stringify(userCart.items),
 			},
 		});
+
+		// Создаем новый платеж, связываем его с только что созданным заказом,
+		// указываем сумму платежа, id заказа, описание
+		const paymentData = await createPayment({
+			amount: order.totalAmount,
+			orderId: order.id,
+			description: 'Оплата заказа #' + order.id,
+		});
+		
 
 		// Обнуляем общую сумму корзины, чтобы не было
 		// возможности оформить заказ с обнуленной корзиной
@@ -115,14 +134,6 @@ export async function createOrder(data: TCheckoutFormValues) {
 			where: {
 				cartId: userCart.id,
 			},
-		});
-
-		// Создаем новый платеж, связываем его с только что созданным заказом,
-		// указываем сумму платежа, id заказа, описание
-		const paymentData = await createPayment({
-			amount: order.totalAmount,
-			orderId: order.id,
-			description: 'Оплата заказа #' + order.id,
 		});
 
 		// Если платеж не создан, выбрасываем ошибку

@@ -20,17 +20,15 @@ export default function CheacoutLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<main className="min-h-screen min-w-[1090px] bg-secondary-foreground">
-			<Container>
+		<main className="min-h-screen min-w-[1090px]">
 				<Suspense>
 					<Header
 						hasSearch={false}
 						hasCart={false}
-						className="border-b-gray-600 bg-secondary-foreground"
+						className=" shadow-lg shadow-zinc-800 z-10"
 					/>
 				</Suspense>
 				{children}
-			</Container>
 		</main>
 	);
 }

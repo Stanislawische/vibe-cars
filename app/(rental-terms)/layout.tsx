@@ -25,6 +25,7 @@ export default function RentaltLayout({
 				<Suspense>
 					<Header
 						hasSearch={false}
+						className='shadow-lg shadow-zinc-800 z-10'
 					/>
 				</Suspense>
 				{children}

@@ -7,6 +7,17 @@ interface Props {
 	amount: number;
 }
 
+/**
+ * Создает платеж с использованием предоставленных данных.
+ *
+ * @param {Props} details - Объект с деталями платежа, включая описание,
+ *     идентификатор заказа и сумму.
+ * @returns {Promise<PaymentData>} Обещание, которое разрешается в объект данных платежа,
+ *     содержащий информацию о созданном платеже.
+ *
+ * @throws {Error} Если возникает ошибка при создании платежа.
+ */
+
 export async function createPayment(details: Props): Promise<PaymentData> {
 	try {
 		const { data } = await axios.post<PaymentData>(

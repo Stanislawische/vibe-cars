@@ -12,6 +12,21 @@ interface Props {
 	onClose?: VoidFunction;
 }
 
+/**
+ * Отображает компонент формы входа, который позволяет пользователям
+ * войти в систему, используя свой email и пароль или через внешние
+ * провайдеры, такие как GitHub и Google. Использует react-hook-form
+ * для управления формой и zod для валидации схемы. Показывает уведомления
+ * об успехе или ошибке с помощью react-hot-toast в зависимости от результата
+ * аутентификации. Вызывает `onClose` callback при успешном входе.
+ *
+ * @param {Object} props - Свойства компонента.
+ * @param {VoidFunction} props.onClose - Необязательный callback, вызываемый
+ * при успешном входе.
+ *
+ * @returns {JSX.Element} Отображаемый компонент формы входа.
+ */
+
 export const LoginForm: React.FC<Props> = ({ onClose }) => {
 	const form = useForm<TFormLoginValues>({
 		resolver: zodResolver(formLoginSchema),
@@ -94,7 +109,7 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
 					Войти
 				</Button>
 				<div className="flex gap-2 mt-2">
-					<Button 
+					<Button
 						variant={'secondary'}
 						onClick={() => {
 							signIn('github', {

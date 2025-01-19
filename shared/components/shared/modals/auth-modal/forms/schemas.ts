@@ -18,10 +18,10 @@ export const imageScheme = z
       [
         "image/png",
       ].includes(file.type),
-    { message: "Invalid image file type" }
+    { message: "Неверный тип изображения" }
   )
   .refine((file) => file.size <= imageSizeLimit, {
-    message: "File size should not exceed 5MB",
+    message: "Изоображение не может быть больше 5 Мб",
   });
 
 export const formRegisterSchema = formLoginSchema
