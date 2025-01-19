@@ -19,8 +19,10 @@ import { Trash2 } from 'lucide-react';
 import { UploadButton } from '@/shared/lib/uploadthing';
 import { DeleteButton } from '../../delete-button';
 
+export type IProduct = ProductDB;
+
 interface Props {
-	values?: ProductDB;
+	values?: IProduct | null;
 }
 
 export const CreateProductForm: React.FC<Props> = ({ values }) => {
@@ -81,6 +83,7 @@ export const CreateProductForm: React.FC<Props> = ({ values }) => {
 	};
 
 	const imageUrl = form.watch('imageUrl');
+	
 
 	return (
 		<FormProvider {...form}>

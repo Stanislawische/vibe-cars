@@ -18,7 +18,7 @@ import { FormSelect } from '@/shared/components/shared/form/form-select';
 import { DeleteButton } from '../../delete-button';
 
 interface Props {
-	values?: ProductItemDB;
+	values?: ProductItemDB | null;
 	products: ProductDB[];
 }
 
@@ -99,46 +99,45 @@ export const CreateProductItemForm: React.FC<Props> = ({
 						label="Цвет"
 						placeholder="Выберите цвет..."
 						items={[
-							{
-								value: '1',
+							{/*  10: '#000000',  // черный
+                     			 11: '#7A7A7A',  // серый
+                    			 12: '#FFFFFF',  // белый
+                    			 13: '#FF0000',  // красный
+                     			 14: '#051FFF',  // синий
+                     			 15: '#26FF05',  // зеленый
+                    			 18: '#8A452E',  // оранжевый
+                     			 22: '#0AFFFA',  // голубой*/
+								value: '10',
 								label: 'Черный',
 							},
 							{
-								value: '2',
-								label: 'Белый',
-							},
-							{
-								value: '3',
+								value: '11',
 								label: 'Серый',
 							},
 							{
-								value: '4',
-								label: 'Красный',
+								value: '12',
+								label: 'Белый',
 							},
 							{
-								value: '5',
-								label: 'Зеленый',
+								value: '13',
+								label: 'Красный',
 							},
 							{
-								value: '6',
-								label: 'Синий',
+								value: '14',
+								label: 'Синий',
 							},
 							{
-								value: '7',
-								label: 'Желтый',
+								value: '15',
+								label: 'Зеленый',
 							},
 							{
-								value: '8',
-								label: 'Голубой',
+								value: '18',
+								label: 'Оранжевый',
 							},
 							{
-								value: '9',
-								label: 'Оранжевый',
-							},
-							{
-								value: '10',
-								label: 'Розовый',
-							},
+								value: '22',
+								label: 'Голубой',
+							}							
 						]}
 					/>
 					<FormSelect

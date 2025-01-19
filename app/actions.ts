@@ -464,13 +464,10 @@ export async function updatePlans(id: number, data: Prisma.PlanDBUpdateInput) {
 export async function createPlans(data: Prisma.PlanDBCreateInput) {
 	try {
 		await prisma.planDB.create({
-			data: {
-				name: data.name,
-				price: data.price,
-			},
+			data,
 		});
 
-		revalidatePath('/dashboard/PLANS');
+		revalidatePath('/dashboard/plans');
 	} catch (error) {
 		console.log('Error [CREATE_PLANS]', error);
 		throw error;

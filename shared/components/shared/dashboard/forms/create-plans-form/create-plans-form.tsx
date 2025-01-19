@@ -9,19 +9,38 @@ import { useRouter, useParams } from 'next/navigation';
 import { createPlans, updatePlans } from '@/app/actions';
 import toast from 'react-hot-toast';
 import { DashboardFormHeader } from '../../dashboard-form-header';
-import { PlanDB } from '@prisma/client';
 import {
 	CreatePlansFormSchema,
 	CreatePLansFormValues,
 } from '@/shared/components/shared/dashboard/forms/create-plans-form/constants';
 import { DeleteButton } from '../../delete-button';
-import { Label } from '@/shared/components/ui/label';
+
+type Plans = {
+	id: number;
+	name: string;
+	price: number;
+};
 
 interface Props {
-	values?: PlanDB;
+	values?: Plans | null;
 }
 
-export const CreatePLansForm: React.FC<Props> = ({ values }) => {
+/**
+ * Компонент для создания или редактирования тарифного плана.
+ *
+ * @param {Props} props - Свойства компонента.
+ * @param {PlanDB} [props.values] - Начальные значения для формы плана.
+ *
+ * Этот компонент использует форму с полями ввода для создания или редактирования
+ * тарифных планов. Он обрабатывает отправку данных для создания или обновления
+ * планов с помощью `react-hook-form` с валидацией, основанной на `zod`.
+ * Отображает состояние загрузки и обрабатывает успешные и ошибочные уведомления
+ * с помощью `react-hot-toast`.
+ *
+ * @returns {JSX.Element} Отрисованный компонент формы плана.
+ */
+
+export const CreatePlansForm: React.FC<Props> = ({ values }) => {
 	const params = useParams<{ id: string }>();
 	const router = useRouter();
 	const [loading, setLoading] = React.useState(false);
@@ -34,6 +53,16 @@ export const CreatePLansForm: React.FC<Props> = ({ values }) => {
 		resolver: zodResolver(CreatePlansFormSchema),
 	});
 
+	/**
+	 * Обработчик отправки формы.
+	 *
+	 * @param {CreatePLansFormValues} data - Данные формы.
+	 *
+	 * Если параметр `id` из `useParams` существует, то обновляет соответствующий
+	 * тариф, иначе - создает новый.
+	 *
+	 * @throws {Error} - Если произошла ошибка.
+	 */
 	const onSubmit: SubmitHandler<CreatePLansFormValues> = async (data) => {
 		try {
 			setLoading(true);

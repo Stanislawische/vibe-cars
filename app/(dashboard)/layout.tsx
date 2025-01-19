@@ -13,13 +13,15 @@ export default function DashboardLayout({
 }) {
 	return (
 		<main>
-			<Container>
 				<Suspense>
 					<Header hasSearch={false} hasCart={false} />
-					<DashboardMenu />
+					
+					
 				</Suspense>
+				<Container>
+				<DashboardMenu />
 				{children}
-			</Container>
+				</Container>
 		</main>
 	);
 }

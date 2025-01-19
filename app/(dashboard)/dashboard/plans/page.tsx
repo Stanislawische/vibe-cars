@@ -1,5 +1,5 @@
 import { prisma } from '@/prisma/prisma-client';
-import { CreatePLansForm } from '@/shared/components/shared/dashboard/forms/create-plans-form/create-plans-form';
+import { CreatePlansForm } from '@/shared/components/shared/dashboard/forms/create-plans-form/create-plans-form';
 import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
 
@@ -24,5 +24,5 @@ export default async function DashboardPlans() {
 		return <div>Доступ запрещен</div>;
 	}
 
-	return <CreatePLansForm />;
+	return <CreatePlansForm />;
 }

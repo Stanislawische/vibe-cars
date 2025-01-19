@@ -14,8 +14,23 @@ import { DashboardFormHeader } from '../../dashboard-form-header';
 import { DeleteButton } from '../../delete-button';
 
 interface Props {
-  values?: CategoryDB;
+  values?: CategoryDB | null;
 }
+
+/**
+ * Компонент для создания или редактирования категории.
+ *
+ * @param {Props} props - Свойства компонента.
+ * @param {CategoryDB} [props.values] - Начальные значения для формы категории.
+ *
+ * @returns {JSX.Element} Отрисованный компонент формы категории.
+ *
+ * Этот компонент использует форму с полями ввода для создания или редактирования
+ * категории. Он обрабатывает отправку для создания или обновления категорий с
+ * помощью `react-hook-form` с валидацией, основанной на `zod`. Отображает
+ * состояние загрузки и обрабатывает успешные и ошибочные уведомления с помощью
+ * `react-hot-toast`.
+ */
 
 export const CreateCategoryForm: React.FC<Props> = ({ values }) => {
   const params = useParams<{ id: string }>();

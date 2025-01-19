@@ -13,13 +13,8 @@ interface Props {
 
 export const DashboardFormHeader: React.FC<Props> = ({ isEdit, loading, className }) => {
   return (
-    <div className={cn('flex justify-between items-center mb-7', className)}>
-      <Tabs defaultValue={isEdit ? 'edit' : 'create'} >
-        <TabsList className='bg-secondary-foreground rounded-lg'>
-          <TabsTrigger value="create" className='h-10 m-1'>Создание</TabsTrigger>
-          <TabsTrigger value="edit" className='h-10 m-1'>Редактирование</TabsTrigger>
-        </TabsList>
-      </Tabs>
+    <div className={cn('flex justify-between items-center my-5', className)}>
+      <h1 className="font-extrabold text-3xl">{isEdit ? 'Редактирование' : 'Создание'}</h1>
       <Button loading={loading}>Сохранить</Button>
     </div>
   );

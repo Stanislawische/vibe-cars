@@ -11,7 +11,7 @@ export default function NotFoundPage() {
 			<InfoBlock
 				title="Доступ заблокирован"
 				text="Данная страница доступна только администраторам"
-				imageUrl="/assets/images/lock.png"
+				imageUrl="/assets/images/dashboard.png"
 			/>
 		</div>
 	);

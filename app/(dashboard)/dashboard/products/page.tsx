@@ -4,17 +4,6 @@ import { getUserSession } from '@/shared/lib/get-user-session';
 import { redirect } from 'next/navigation';
 
 export default async function DashboardProducts() {
-	const products = await prisma.productDB.findMany({
-		where: {
-			name: {
-				mode: 'insensitive',
-			},
-		},
-		take: 3,
-		orderBy: {
-			name: 'asc',
-		},
-	});
 
 	const session = await getUserSession();
 
@@ -36,5 +25,5 @@ export default async function DashboardProducts() {
 		return <div>Доступ запрещен</div>;
 	}
 
-	return <CreateProductForm values={products[1]} />;
+	return <CreateProductForm />;
 }

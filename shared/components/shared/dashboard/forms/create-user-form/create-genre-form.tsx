@@ -13,7 +13,7 @@ import { DashboardFormHeader } from '../../dashboard-form-header';
 import { DeleteButton } from '../../delete-button';
 
 interface Props {
-	values?: UserDB;
+	values?: UserDB | null;
 }
 
 export const CreateUserForm: React.FC<Props> = ({ values }) => {
