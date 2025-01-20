@@ -22,21 +22,34 @@ export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
             <div className="grid grid-cols-2 gap-5">
                 <FormInput
                     name="firstName"
-                    placeholder="Имя"
+                    label="Имя"
+                    type="text"
+                    placeholder="Введите Ваше имя"
+                    required
                 />
                 <FormInput
                     name="lastName"
-                    placeholder="Фамилия"
+                    label="Фамилия"
+                    type="text"
+                    placeholder="Введите Вашу фамилию"
+                    required
                 />
                 <FormInput
                     name="email"
-                    placeholder="E-Mail"
+                    label="E-Mail"
+                    placeholder="Введите Ваш E-Mail"
+                    type="email"
+                    required
                 />
                 <FormInput
                     name="phone"
-                    placeholder="Номер телефона"
+                    type="tel"
+                    label="Номер телефона"
+                    placeholder="Введите Ваш номер телефона"
+                    required
                 />
             </div>
         </ZincBlock>
     );
 };
+ 

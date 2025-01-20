@@ -15,7 +15,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 const TAX = 20;
-const DELIVERY_PRICE = 25;
+const DELIVERY_PRICE = 30;
 
 /**
  * Создает заказ на основе данных из формы.
@@ -88,7 +88,7 @@ export async function createOrder(data: TCheckoutFormValues) {
 		const taxPrice = (userCart.totalAmount * TAX) / 100;
 		const deliveryPrice =
 		userCart.items.map((item) => item.quantity).reduce((acc, item) => acc + item, 0) *
-			DELIVERY_PRICE || 0;
+			DELIVERY_PRICE || 25;
 		const totalPrice = userCart.totalAmount + taxPrice + deliveryPrice;
 
 		// Создаем новый заказ, связываем его с корзиной,

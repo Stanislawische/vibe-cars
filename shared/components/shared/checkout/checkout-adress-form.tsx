@@ -26,7 +26,10 @@ export const CheckoutAdressForm: React.FC<Props> = ({ className }) => {
 
                 <FormInput
                     name="address"
-                    placeholder="Адрес доставки"
+                    type="text"
+                    label="Адрес доставки"
+                    placeholder="Введите адрес доставки"
+                    required
                 />
 
                 <FormTextarea

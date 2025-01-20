@@ -14,7 +14,7 @@ interface Props {
 }
 
 const TAX = 20;
-const DELIVERY_PRICE = 25;
+const DELIVERY_PRICE = 30;
 
 /**
  * Компонент, отображающий информацию о корзине,
@@ -39,7 +39,7 @@ export const CheckoutSidebar: React.FC<Props> = ({
 	const taxPrice = (totalAmount * TAX) / 100;
 	const deliveryPrice =
 		items.map((item) => item.quantity).reduce((acc, item) => acc + item, 0) *
-			DELIVERY_PRICE || 0;
+			DELIVERY_PRICE || 25;
 	const totalPrice = totalAmount + taxPrice + deliveryPrice;
 
 	return (
